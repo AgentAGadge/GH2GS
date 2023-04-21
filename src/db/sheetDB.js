@@ -91,34 +91,29 @@ class SheetDB {
     return lineNumber;
   }
 
+  replaceSSIDByName(projectConfiguration, lineNumber, column, fieldName){
+    var optionId = this.sheet.getRange(lineNumber,column ).getValue();
+    var optionName = projectConfiguration.getOptionNameById(fieldName, optionId);
+    if(null !== optionName){
+      this.sheet.getRange(lineNumber,column ).setValue(optionName);
+    }
+  }  
+
   applyProjectConfiguration(projectConfiguration){
     for (var lineNumber = NUM_HEADER_LINES+1; lineNumber < this.nextLine; lineNumber++ ){
       //Issue Type
-      var optionId = this.sheet.getRange(lineNumber,COLUMN_TYPE_RANK ).getValue();
-      var optionName = projectConfiguration.getOptionNameById("Issue type", optionId);
-      if(null !== optionName){
-        this.sheet.getRange(lineNumber,COLUMN_TYPE_RANK ).setValue(optionName);
-      }
+      this.replaceSSIDByName(projectConfiguration, lineNumber, COLUMN_TYPE_RANK, PROJECT_FIELD_NAME_TYPE);
       //Status
-      var optionId = this.sheet.getRange(lineNumber,COLUMN_STATUS_RANK ).getValue();
-      var optionName = projectConfiguration.getOptionNameById("Status", optionId);
-      if(null !== optionName){
-        this.sheet.getRange(lineNumber,COLUMN_STATUS_RANK ).setValue(optionName);
-      }
+      this.replaceSSIDByName(projectConfiguration, lineNumber, COLUMN_STATUS_RANK, PROJECT_FIELD_NAME_STATUS);
       //Priority
-      var optionId = this.sheet.getRange(lineNumber,COLUMN_PRIORITY_RANK ).getValue();
-      var optionName = projectConfiguration.getOptionNameById("Priority", optionId);
-      if(null !== optionName){
-        this.sheet.getRange(lineNumber,COLUMN_PRIORITY_RANK ).setValue(optionName);
-      }
+      this.replaceSSIDByName(projectConfiguration, lineNumber, COLUMN_PRIORITY_RANK, PROJECT_FIELD_NAME_PRIORITY);
       //Impacted Version
-      var optionId = this.sheet.getRange(lineNumber,COLUMN_VERSION_RANK ).getValue();
-      var optionName = projectConfiguration.getOptionNameById("Impacted version", optionId);
-      if(null !== optionName){
-        this.sheet.getRange(lineNumber,COLUMN_VERSION_RANK ).setValue(optionName);
-      }
+      this.replaceSSIDByName(projectConfiguration, lineNumber, COLUMN_VERSION_RANK, PROJECT_FIELD_NAME_VERSION);
+      //EPIC
+      this.replaceSSIDByName(projectConfiguration, lineNumber, COLUMN_EPIC_RANK, PROJECT_FIELD_NAME_EPIC);
     }   
-  }  
+  }
+
 }
 
 

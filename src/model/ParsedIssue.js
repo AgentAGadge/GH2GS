@@ -21,34 +21,34 @@ class ParsedIssue {
         var field = projectV2Item.fieldValues.nodes[fieldCounter]
         if(typeof field !== 'undefined' && typeof field.field !== 'undefined' && typeof field.field.name !== 'undefined'){
           switch (field.field.name)  {
-              case "Assignees":
+              case PROJECT_FIELD_NAME_ASSIGNEES:
                   this.assignee = field.users.nodes[0].id;
                   break;
-              case "Repository":
+              case PROJECT_FIELD_NAME_REPO:
                   this.repository = field.repository.name;
                   break;
-              case "Title":
+              case PROJECT_FIELD_NAME_TITLE:
                 this.title = field.text;
                 break;
-              case "EPIC":
+              case PROJECT_FIELD_NAME_EPIC:
                 this.epic = field.optionId;
                 break;
-              case "Status":
+              case PROJECT_FIELD_NAME_STATUS:
                 this.status = field.optionId;
                 break;
-              case "Sprint":
+              case PROJECT_FIELD_NAME_SPRINT:
                 this.sprint = field.title;
                 break;
-              case "Impacted version":
+              case PROJECT_FIELD_NAME_VERSION:
                 this.impacted_version = field.optionId;
                 break;
-              case "Priority":
+              case PROJECT_FIELD_NAME_PRIORITY:
                 this.priority = field.optionId;
                 break;
-              case "Issue type":
+              case PROJECT_FIELD_NAME_TYPE:
                 this.issue_type = field.optionId;
                 break;
-            case "Points estimate":
+            case PROJECT_FIELD_NAME_EST_POINTS:
                 this.estimated_points = field.number;
                 break;
               default:

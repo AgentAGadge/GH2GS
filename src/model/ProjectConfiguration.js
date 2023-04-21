@@ -1,3 +1,14 @@
+const PROJECT_FIELD_NAME_ASSIGNEES = "Assignees"
+const PROJECT_FIELD_NAME_REPO = "Repository"
+const PROJECT_FIELD_NAME_TITLE = "Title"
+const PROJECT_FIELD_NAME_EPIC = "EPIC"
+const PROJECT_FIELD_NAME_STATUS = "Status"
+const PROJECT_FIELD_NAME_SPRINT = "Sprint"
+const PROJECT_FIELD_NAME_VERSION = "Impacted version"
+const PROJECT_FIELD_NAME_PRIORITY = "Priority"
+const PROJECT_FIELD_NAME_TYPE = "Issue type"
+const PROJECT_FIELD_NAME_EST_POINTS = "Points estimate"
+
 class ProjectConfiguration{
     constructor(){
         this.jsonOptionsSS=null;
