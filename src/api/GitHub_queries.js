@@ -52,9 +52,9 @@ const GITHUB_QUERY_GET_PROJECT_ITEMS = ` \
       } \
     } \
   } \
-    `;
+    `
 
-    const GITHUB_QUERY_GET_SSFIELD_OPTION_NAMES = ` \
+const GITHUB_QUERY_GET_SSFIELD_OPTION_NAMES = ` \
     query GetProjectItems($projectNumber : Int!) { \
     user(login: "AgentAGadge") { \
       projectV2(number: $projectNumber){ \
@@ -74,9 +74,9 @@ const GITHUB_QUERY_GET_PROJECT_ITEMS = ` \
       } \
     } \
   } \
-    `;
+    `
 
-    const GITHUB_QUERY_NODE_BY_ID = ` \
+const GITHUB_QUERY_NODE_BY_ID = ` \
     query GetNodeById($nodeId : ID!) { \
     node(id: $nodeId) { \
         ... on User {
@@ -84,4 +84,4 @@ const GITHUB_QUERY_GET_PROJECT_ITEMS = ` \
         }
     } \
   } \
-    `;
+    `

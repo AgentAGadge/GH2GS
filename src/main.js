@@ -1,13 +1,15 @@
-function gitquery() {
-  Logger.log("gitquery starting...")
-  var projectNumber = 2
-  var sheet = SpreadsheetApp.getActive().getSheetByName('Github Database')
-  
+/**
+ * Test
+ */
+function CreateGSFromGH () {
+  Logger.log('gitquery starting...')
+  const projectNumber = 2
+  const sheet = SpreadsheetApp.getActive().getSheetByName('Github Database')
 
-  var sheetDB = new SheetDB(sheet);
-  sheetDB.initDB();
-  Logger.log("sheetDB Initiated.")
+  const sheetDB = new SheetDB(sheet)
+  sheetDB.initDB()
+  Logger.log('sheetDB Initiated.')
 
-  sheetDB.syncDB(projectNumber);
-  Logger.log("sheetDB Synced.")
+  sheetDB.syncDB(projectNumber)
+  Logger.log('sheetDB Synced.')
 }
