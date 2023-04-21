@@ -75,3 +75,13 @@ const GITHUB_QUERY_GET_PROJECT_ITEMS = ` \
     } \
   } \
     `;
+
+    const GITHUB_QUERY_NODE_BY_ID = ` \
+    query GetNodeById($nodeId : ID!) { \
+    node(id: $nodeId) { \
+        ... on User {
+            name
+        }
+    } \
+  } \
+    `;

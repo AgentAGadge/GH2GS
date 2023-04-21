@@ -57,6 +57,8 @@ class SheetDB {
     this.sheet = sheet;
     this.sheetHeaders = buildSheetHeaders();
     this.nextLine = 0;
+    this.projectConfiguration = null;
+    this.userList = {};
   }
 
   
@@ -112,6 +114,50 @@ class SheetDB {
       //EPIC
       this.replaceSSIDByName(projectConfiguration, lineNumber, COLUMN_EPIC_RANK, PROJECT_FIELD_NAME_EPIC);
     }   
+  }
+
+  applyAssignees(){
+    for (var lineNumber = NUM_HEADER_LINES+1; lineNumber < this.nextLine; lineNumber++ ){
+      var userId = this.sheet.getRange(lineNumber,COLUMN_ASSIGNEE_RANK).getValue();
+      if(userId in this.userList){
+        var userName = this.userList[userId];
+      }
+      else{
+        var userName = GetUserNameById(userId);
+      }
+      if(null != userName){
+        this.userList[userId] = userName
+        this.sheet.getRange(lineNumber,COLUMN_ASSIGNEE_RANK).setValue(userName);
+      }
+      
+    }   
+  }
+
+  syncGHFieldsToDB(projectNumber){
+    Logger.log("Syncing Project fields...")
+    this.projectConfiguration = new ProjectConfiguration();
+    this.projectConfiguration.jsonOptionsSS = GetProjectSSFieldsOptionNames(projectNumber);
+
+    this.applyProjectConfiguration(this.projectConfiguration);
+    this.applyAssignees();
+    Logger.log("Project fields synced.")
+  }
+
+  syncGHItemsToDB(projectNumber){
+    Logger.log("Syncing Project items...")
+    var jsonProjectItems = GetProjectItems(projectNumber);
+    for (var itemCounter = 0; itemCounter < jsonProjectItems.items.totalCount; itemCounter = itemCounter + 1){
+      if (typeof jsonProjectItems.items.nodes[itemCounter].content.url !== 'undefined'){
+          var parsedIssue = new ParsedIssue(jsonProjectItems.items.nodes[itemCounter]);
+          this.insertIssue(parsedIssue)
+      }
+    } 
+    Logger.log("Project items synced.")
+  }
+
+  syncDB(projectNumber){
+    this.syncGHItemsToDB(projectNumber);
+    this.syncGHFieldsToDB(projectNumber);
   }
 
 }
