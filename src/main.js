@@ -1,8 +1,8 @@
 /**
- * Test
+ * Main function to create the Google sheet database and populate it from a GitHub project.
  */
 function CreateGSFromGH () {
-  Logger.log('gitquery starting...')
+  Logger.log('CreateGSFromGH starting...')
   const projectNumber = 2
   const sheet = SpreadsheetApp.getActive().getSheetByName('Github Database')
 
