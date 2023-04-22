@@ -1,9 +1,14 @@
+/**
+ * This file contains the queries used within GitHub_API.js to access the GraphQL database of Github.
+ *  - the corresponding username must replace AgentAGadge in the queries from GitHub_queries.js
+ */
+
 const GITHUB_QUERY_GET_PROJECT_ITEMS = ` \
     query GetProjectItems($projectNumber : Int!) { \
     user(login: "AgentAGadge") { \
       projectV2(number: $projectNumber){ \
           databaseId,
-          items(first:10){ 
+          items(first:1000){ 
             totalCount,
             nodes{ 
               databaseId,
@@ -15,7 +20,7 @@ const GITHUB_QUERY_GET_PROJECT_ITEMS = ` \
                   } 
               } 
               , 
-              fieldValues(first:10){ 
+              fieldValues(first:1000){ 
                 totalCount,
                 nodes{ 
                   ... on ProjectV2ItemFieldNumberValue{ 
@@ -59,7 +64,7 @@ const GITHUB_QUERY_GET_SSFIELD_OPTION_NAMES = ` \
     user(login: "AgentAGadge") { \
       projectV2(number: $projectNumber){ \
           databaseId,
-          fields(first:100){
+          fields(first:1000){
             totalCount,
             nodes{
                 ... on ProjectV2SingleSelectField{ 

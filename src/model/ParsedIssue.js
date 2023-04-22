@@ -1,5 +1,16 @@
+/**
+ * This file contains the ParsedIssue class.
+ */
+
+/**
+ * ParseIssue represents a GitHub project Item and contains all the properties we are interested in storing in the DB.
+ */
 class ParsedIssue {
-  constructor (projectV2Item) { // class constructor
+  /**
+   * Instantiates a ParsedIssue and populates its properties based on the available data from a GitHub parsed projectV2Item.
+   * @param {*} projectV2Item projectV2Item retrieved from the GraphQL API.
+   */
+  constructor (projectV2Item) {
     this.databaseId = projectV2Item.databaseId
     this.title = projectV2Item.content.title
     this.created_at = projectV2Item.content.createdAt
@@ -15,10 +26,14 @@ class ParsedIssue {
     this.estimated_points = null
 
     let field = null
+
+    // Go through all the fields available in the input data
     for (let fieldCounter = 0; fieldCounter <= projectV2Item.fieldValues.totalCount; fieldCounter = fieldCounter + 1) {
       field = projectV2Item.fieldValues.nodes[fieldCounter]
+      // If the field exists and has relevant data in it,
       if (typeof field !== 'undefined' && typeof field.field !== 'undefined' && typeof field.field.name !== 'undefined') {
-        switch (field.field.name) {
+        switch (field.field.name) { // check if it is data we store in the SheetDB:
+          // If yes, store it in the ParsedIssue
           case PROJECT_FIELD_NAME_ASSIGNEES:
             this.assignee = field.users.nodes[0].id
             break
