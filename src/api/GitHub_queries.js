@@ -8,7 +8,7 @@ const GITHUB_QUERY_GET_PROJECT_ITEMS = ` \
     user(login: "AgentAGadge") { \
       projectV2(number: $projectNumber){ \
           databaseId,
-          items(first:1000){ 
+          items(first:100){ 
             totalCount,
             nodes{ 
               databaseId,
@@ -20,7 +20,7 @@ const GITHUB_QUERY_GET_PROJECT_ITEMS = ` \
                   } 
               } 
               , 
-              fieldValues(first:1000){ 
+              fieldValues(first:50){ 
                 totalCount,
                 nodes{ 
                   ... on ProjectV2ItemFieldNumberValue{ 
@@ -64,7 +64,7 @@ const GITHUB_QUERY_GET_SSFIELD_OPTION_NAMES = ` \
     user(login: "AgentAGadge") { \
       projectV2(number: $projectNumber){ \
           databaseId,
-          fields(first:1000){
+          fields(first:100){
             totalCount,
             nodes{
                 ... on ProjectV2SingleSelectField{ 
