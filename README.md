@@ -2,6 +2,8 @@
 
 <i>This is a test project that is not supported and needs specific fine-tuning to be compatible to a given use-case. </i> 
 
+[This GitHub repository](https://github.com/fiedl/github-project-to-csv) offers a script with similar functionalities, go check it out! 
+
 ## Context and overview
 
 GitHub projects (and issues) are extensively used by developers. However, GitHub lacks feature dedicated to engineering management and organization such as building metrics from the project data (burndown charts, workload by issue type, etc.)
